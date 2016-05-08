@@ -28,18 +28,22 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
-    less: {
-      options: {
-        compress: true,
-        paths: ['<%= yeoman.app %>/styles']
-      },
-      files: {
-        '<%= yeoman.app %>/styles/app.css': '<%= yeoman.app %>/styles/app.less'
-      }
-    },
-
     // Project settings
     yeoman: appConfig,
+
+    less: {
+      development: {
+        options: {
+          compress: true,
+          yuicompress: true,
+          optimzation: 2,
+          paths: ['<%= yeoman.app %>/styles']
+        },
+        files: {
+          '<%= yeoman.app %>/styles/app.css': '<%= yeoman.app %>/styles/app.less'
+        }
+      }
+    },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -63,7 +67,7 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:styles', 'postcss']
       },
       less: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        files: ['<%= yeoman.app %>/styles/**/*.less'],
         tasks: ['less']
       },
       gruntfile: {
@@ -439,9 +443,6 @@ module.exports = function (grunt) {
       }
     }
   });
-
-  grunt.loadNpmTasks('grunt-contrib-less');
-
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
