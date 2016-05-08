@@ -22,15 +22,17 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
+    //version: require('./package.json').version || 'version',
     dist: 'dist'
   };
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
-    // Project settings
     yeoman: appConfig,
 
+    pkg: grunt.file.readJSON('package.json'),
+
+    // Project settings
     less: {
       development: {
         options: {
@@ -379,6 +381,27 @@ module.exports = function (grunt) {
       }
     },
 
+    replace: {
+      dist: {
+        options: {
+          patterns: [{
+            match: 'version',
+            replacement: '<%= pkg.version %>'
+          },
+          {
+            match: 'timestamp',
+            replacement: '<%= new Date().toISOString() %>'
+          }]
+        },
+        files: [{
+          expand: true, 
+          flatten: true, 
+          src: ['<%= yeoman.app %>/index.html'],
+          dest: '<%= yeoman.dist %>' 
+        }]
+      }
+    },
+
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -488,6 +511,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'replace',
     'cdnify',
     'cssmin',
     'uglify',
