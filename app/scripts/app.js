@@ -26,10 +26,20 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/help', {
+        templateUrl: 'views/help.html',
+        controller: 'HelpCtrl',
+        controllerAs: 'help'
+      })
+      .when('/print', {
+        templateUrl: 'views/print.html',
+        controller: 'PrintCtrl',
+        controllerAs: 'print'
+      })
+      .when('/weight', {
+        templateUrl: 'views/weight.html',
+        controller: 'WeightCtrl',
+        controllerAs: 'weight'
       })
       .otherwise({
         redirectTo: '/'
