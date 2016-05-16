@@ -246,7 +246,7 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%= phr.dist %>/scripts/**/*.js',
+          '<%= phr.dist %>/scripts/{,*/}*js',
           '<%= phr.dist %>/styles/{,*/}*.css',
           '<%= phr.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= phr.dist %>/styles/fonts/*'

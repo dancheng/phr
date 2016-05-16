@@ -19,7 +19,17 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="procedure-name">Procedure Name</label>
-            <input type="text" class="form-control" />
+            <angucomplete-alt 
+              placeholder="Procedure" 
+              pause="300"
+              selected-object="selectedProcedure"
+              local-data="data" 
+              local-search="localSearch"
+              title-field="desc"
+              minlength="3"
+              input-class="form-control form-control-small"
+              match-class="highlight" />
+
           </div>
           <div class="form-group">
             <label for="date-performed">Date Performed</label>
