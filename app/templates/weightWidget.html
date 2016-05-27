@@ -1,6 +1,7 @@
 <div class="widget">
-  <div class="header">
-    Weight
+  <div class="contents">
+    <h2>{{weight.value}} {{weight.uom}}</h2>
+    <div>Weight</div>
   </div>
   <div class="icon">
     <a href="" class="btn" data-toggle="modal" data-target="#weightModal"><span class="fa fa-plus"></span></a>
@@ -21,7 +22,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>

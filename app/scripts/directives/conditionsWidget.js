@@ -21,6 +21,7 @@ angular.module('phrApp')
     }
 
     function link(scope, element, attrs) {
+      scope.time = new Date();
       scope.localSearch = function(str, concepts) {
         var matches = [];
         concepts.forEach(function(concept) {

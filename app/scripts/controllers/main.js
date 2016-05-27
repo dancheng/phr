@@ -9,7 +9,8 @@
    * Controller of the phrApp
    */
   angular.module('phrApp')
-    .controller('MainCtrl', function ($scope, $http, config) {
-
+    .controller('MainCtrl', function ($scope, $http, config, initialData) {
+      $scope.data = initialData;
     });
+
 })();

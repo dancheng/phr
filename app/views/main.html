@@ -1,10 +1,10 @@
 
 <div id="dashboard" class="container-fluid">
   <div class="page-header">
-    <h2><span class="fa fa-smile-o"></span> John Smith</h2>
+    <h2><span class="fa fa-smile-o"></span> {{data.demographic.firstName}} {{data.demographic.middleName}} {{data.demographic.lastName}}</h2>
     <ul class="list-unstyled">
-      <li>Gender: Male</li>
-      <li>DOB: 01-01-1970</li>
+      <li>Gender: {{data.demographic.gender}}</li>
+      <li>DOB: {{data.demographic.dob}}</li>
     </ul>
   </div>
 
@@ -90,16 +90,16 @@
 
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <weight-widget></weight-widget>
+      <weight-widget data="data"></weight-widget>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <height-widget></height-widget>
+      <height-widget data="data"></height-widget>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <bp-widget></bp-widget>
+      <bp-widget data="data"></bp-widget>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <hr-widget></hr-widget>
+      <hr-widget data="data"></hr-widget>
     </div>
   </div>
 
@@ -151,3 +151,11 @@
 
 </div>
 
+<hr />
+
+<div class="footer">
+  <span>&copy; 2016 SmartPHR</span>
+  <span>Legal</span>
+  <span>Privacy & Cookie</span>
+  <span>Help</span>
+</div>

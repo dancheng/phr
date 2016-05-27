@@ -31,7 +31,12 @@
           </div>
           <div class="form-group">
             <label for="date-of-onset">Date of Onset</label>
-            <input type="text" class="form-control" />
+            <div class='input-group'>
+              <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="time" ng-model="ctrl.time">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

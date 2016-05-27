@@ -18,14 +18,22 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'angucomplete-alt'
+    'angucomplete-alt',
+    'datetimepicker'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        resolve: {
+          "initialData": ['MemberSvc', function(MemberSvc) {
+            return MemberSvc.getData(10000).then(function(response) {
+              return response.data;
+            });
+          }]
+        }
       })
       .when('/help', {
         templateUrl: 'views/help.html',
