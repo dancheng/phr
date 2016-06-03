@@ -28,10 +28,14 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main',
         resolve: {
-          "initialData": ['MemberSvc', function(MemberSvc) {
-            return MemberSvc.getData(10000).then(function(response) {
-              return response.data;
+          "initialData": ['$q', 'MemberSvc', 'AlertSvc', function($q, MemberSvc, AlertSvc) {
+            return $q.all({
+              member: MemberSvc.getData(10000),
+              alerts: AlertSvc.getData(10000)
+            }).then(function(data) {
+              return { member: data.member.data, alerts: data.alerts.data };
             });
+
           }]
         }
       })

@@ -14,25 +14,36 @@ angular.module('phrApp')
 
     function link(scope, element, attrs) {
       var measurements = scope.data.measurements;
-      scope.weight = _.find(measurements, {'type': 'weight'})
+
+      // get latest weight by date
+      scope.weight = _.chain(measurements).filter({'type': 'weight'}).orderBy(['date'], ['desc']).first(1).value();
 
       scope.save = function() {
+        var config = {
+          headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+          }
+        };
+
         var weight = element.find('input').val();
+        var uom = "lbs";
         var memberId = scope.data.demographic.id;
         var data = $.param({
+          id: memberId,
           json: JSON.stringify({
-            rowID: null,
-            memberID: memberId,
-            type: 'weight',
-            value: weight,
-            uom: 'lbs',
-            date: null
+            rowID: 0,
+            type: "weight",
+            value: weight+"",
+            uom: uom,
+            date: (new Date).toISOString()
           })
         });
 
-        $http.post("http://alphaphr.com:8080/core/mea?id=" + memberId, data).success(function(data, status) {
+        $http.post("http://alphaphr.com:8080/core/mea", data, config).success(function(data, status) {
+          scope.weight = { value: weight, uom: uom };
+
           element.find('#weightModal').modal('hide');
-          console.log('save', weight);
+          console.log('data', data);
         });
       }
     }

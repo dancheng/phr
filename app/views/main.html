@@ -1,88 +1,14 @@
 
 <div id="dashboard" class="container-fluid">
   <div class="page-header">
-    <h2><span class="fa fa-smile-o"></span> {{data.demographic.firstName}} {{data.demographic.middleName}} {{data.demographic.lastName}}</h2>
+    <h2><span class="fa fa-smile-o"></span> {{data.member.demographic.firstName}} {{data.member.demographic.middleName}} {{data.member.demographic.lastName}}</h2>
     <ul class="list-unstyled">
-      <li>Gender: {{data.demographic.gender}}</li>
-      <li>DOB: {{data.demographic.dob}}</li>
+      <li>Gender: {{data.member.demographic.gender}}</li>
+      <li>DOB: {{data.member.demographic.dob}}</li>
     </ul>
   </div>
 
-
-  <ul class="nav nav-pills">
-    <li class="active"><a data-target="#alerts-tab" data-toggle="pill">Alerts</a></li>
-    <li><a data-target="#updates-tab" data-toggle="pill">Updates</a></li>
-  </ul>
-
-
-  <div class="tab-content">
-    <div id="alerts-tab" class="tab-pane fade in active">
-      <div>
-        <h3><span class="fa fa-exclamation-circle"></span> Alerts</h3>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>05/05/2016</td>
-                <td>Weight: Your weight is too high</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>05/05/2016</td>
-                <td>Blood pressure: Your maybe prehypertension</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>05/05/2016</td>
-                <td>Medications: Warfarin drug interaction with Lipitor</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div id="updates-tab" class="tab-pane fade">
-      <div>
-        <h3><span class="fa fa-database"></span> Updates</h3>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>05/05/2016</td>
-                <td>Weight: 150 lbs</td>
-              </tr>
-              <tr>
-                <td>05/01/2016</td>
-                <td>Blood Pressure: 139/89</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <alerts-widget data="data.alerts"></alerts-widget>
 
   <div>
     <h3><span class="fa fa-heartbeat"></span> Measurements</h3>
@@ -90,16 +16,13 @@
 
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <weight-widget data="data"></weight-widget>
+      <weight-widget data="data.member"></weight-widget>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <height-widget data="data"></height-widget>
+      <bp-widget data="data.member"></bp-widget>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6">
-      <bp-widget data="data"></bp-widget>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <hr-widget data="data"></hr-widget>
+      <hr-widget data="data.member"></hr-widget>
     </div>
   </div>
 
@@ -116,6 +39,7 @@
       <procedures-widget></procedures-widget>
     </div>
 
+<!--
     <div class="col-lg-3 col-md-4 col-sm-6">
       <immunizations-widget></immunizations-widget>
     </div>
@@ -123,6 +47,8 @@
     <div class="col-lg-3 col-md-4 col-sm-6">
       <allergies-widget></allergies-widget>
     </div>
+-->
+
     <div class="col-lg-3 col-md-4 col-sm-6">
       <conditions-widget></conditions-widget>
     </div>
@@ -131,6 +57,7 @@
     </div>
   </div>
 
+<!--
   <div>
     <h3><span class="fa fa-history"></span> Historic Health</h3>
   </div>
@@ -148,6 +75,7 @@
       <social-history-widget></social-history-widget>
     </div>
   </div>
+-->
 
 </div>
 
