@@ -33,6 +33,7 @@ angular
               member: MemberSvc.getData(10000),
               alerts: AlertSvc.getData(10000)
             }).then(function(data) {
+console.log('data', data);
               return { member: data.member.data, alerts: data.alerts.data };
             });
 
@@ -52,7 +53,94 @@ angular
       .when('/weight', {
         templateUrl: 'views/weight.html',
         controller: 'WeightCtrl',
-        controllerAs: 'weight'
+        controllerAs: 'weight',
+        resolve: {
+          "initialData": ['MemberSvc', function(MemberSvc) {
+            return MemberSvc.getData(10000).then(function(response) {
+              return response.data;
+            });
+          }]
+        }
+      })
+      .when('/bp', {
+        templateUrl: 'views/bp.html',
+        controller: 'BpCtrl',
+        controllerAs: 'bp',
+        resolve: {
+          "initialData": ['MemberSvc', function(MemberSvc) {
+            return MemberSvc.getData(10000).then(function(response) {
+              return response.data;
+            });
+          }]
+        }
+      })
+      .when('/hr', {
+        templateUrl: 'views/hr.html',
+        controller: 'HrCtrl',
+        controllerAs: 'hr',
+        resolve: {
+          "initialData": ['MemberSvc', function(MemberSvc) {
+            return MemberSvc.getData(10000).then(function(response) {
+              return response.data;
+            });
+          }]
+        }
+      })
+      .when('/medications', {
+        templateUrl: 'views/medications.html',
+        controller: 'MedicationsCtrl',
+        controllerAs: 'medications',
+        resolve: {
+          "initialData": ['MemberSvc', function(MemberSvc) {
+            return MemberSvc.getData(10000).then(function(response) {
+              return response.data;
+            });
+          }]
+        }
+      })
+      .when('/procedures', {
+        templateUrl: 'views/procedures.html',
+        controller: 'ProceduresCtrl',
+        controllerAs: 'procedures',
+        resolve: {
+          "initialData": ['$q', 'MemberSvc', 'SnomedSvc', function($q, MemberSvc, SnomedSvc) {
+            return $q.all({
+              member: MemberSvc.getData(10000),
+              procedure: SnomedSvc.getData('procedure')
+            }).then(function(data) {
+              return { member: data.member.data, procedure: data.procedure.data.concepts };
+            });
+
+          }]
+        }
+      })
+      .when('/conditions', {
+        templateUrl: 'views/conditions.html',
+        controller: 'ConditionsCtrl',
+        controllerAs: 'conditions',
+        resolve: {
+          "initialData": ['$q', 'MemberSvc', 'SnomedSvc', function($q, MemberSvc, SnomedSvc) {
+            return $q.all({
+              member: MemberSvc.getData(10000),
+              disorder: SnomedSvc.getData('disorder')
+            }).then(function(data) {
+              return { member: data.member.data, disorder: data.disorder.data.concepts };
+            });
+
+          }]
+        }
+      })
+      .when('/labs', {
+        templateUrl: 'views/labs.html',
+        controller: 'LabsCtrl',
+        controllerAs: 'labs',
+        resolve: {
+          "initialData": ['MemberSvc', function(MemberSvc) {
+            return MemberSvc.getData(10000).then(function(response) {
+              return response.data;
+            });
+          }]
+        }
       })
       .otherwise({
         redirectTo: '/'

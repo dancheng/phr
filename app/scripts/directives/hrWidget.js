@@ -14,10 +14,8 @@ angular.module('phrApp')
 
     function link(scope, element, attrs) {
      var measurements = scope.data.measurements;
-      scope.hr = _.find(measurements, {'type': 'heartRate'})
-
       // get latest bp by date
-      scope.hr = _.chain(measurements).filter({'type': 'heartRate'}).orderBy(['date'], ['desc']).first(1).value();
+      scope.hr = _.chain(measurements).filter({'type': 'hr'}).orderBy(['date'], ['desc']).first(1).value();
 
       scope.save = function() {
         var config = {

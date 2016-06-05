@@ -1,17 +1,18 @@
 
-<div id="weight" class="container-fluid">
+<div id="bp" class="container-fluid">
 <div>
-  <h3><span class="fa fa-balance-scale"></span> Weight</h3>
+  <h3><span class="fa fa-heart"></span> Blood Pressure</h3>
 </div>
 
 <div class="row">
   <form class="form-inline">
     <div class="form-group">
-      <label>Weight</label>
-      <input type="text" class="form-control" size="4" />
+      <label>Blood pressure</label>
+      <input type="text" class="form-control systolic" size="4" />
+      /
+      <input type="text" class="form-control diastolic" size="4" />
       <select class="form-control">
-        <option>lbs</option>
-        <option>kg</option>
+        <option>mm Hg</option>
       </select>
     </div>
     <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
@@ -24,13 +25,13 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>Weight</th>
+          <th>Blood Pressure</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="weight in data">
-          <td>{{weight.date}}</td>
-          <td>{{weight.value}} {{weight.uom}}</td>
+        <tr ng-repeat="bp in data">
+          <td>{{bp.date}}</td>
+          <td>{{bp.value}} {{bp.uom}}</td>
         </tr>
       </tbody>
     </table>
