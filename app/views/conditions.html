@@ -5,50 +5,7 @@
   </div>
 
   <div class="row">
-<!--
-    <form class="form-inline">
-          <div class="form-group">
-            <label for="condition-name">Condition Name</label>
-            <angucomplete-alt 
-              placeholder="Disorder"
-              pause="300"
-              selected-object="selectedCondition"
-              local-data="localData"
-              local-search="localSearch"
-              title-field="desc"
-              minlength="3"
-              input-class="form-control form-control-small"
-              match-class="highlight" />
-          </div>
-          <div class="form-group">
-            <label for="status">Status</label>
-            <input type="text" class="form-control" ng-model="status" />
-          </div>
-          <div class="form-group">
-            <label for="start-date">Start Date</label>
-            <div class='input-group'>
-              <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="time" ng-model="startDate">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="end-date">End Date</label>
-            <div class='input-group'>
-              <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="time" ng-model="endDate">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-      <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-          </div>
-
-    </form>
--->
-    <div class="icon">
-      <a href="" class="btn" data-toggle="modal" data-target="#conditionsModal"><span class="fa fa-plus"></span> Add Condition</a>
-    </div>
+    <a href="" class="btn" data-toggle="modal" data-target="#conditionsModal"><span class="fa fa-plus"></span> Add Condition</a>
   </div>
 
   <div class="row">
@@ -63,7 +20,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="cond in data">
-            <td><span class="fa fa-edit"></span> {{cond.desc}} ({{cond.code}})</td>
+            <td><span class="fa fa-edit" ng-click="editDelete(this)"></span> {{cond.desc}} ({{cond.code}})</td>
             <td>{{cond.startDate}}</td>
             <td>{{cond.endDate}}</td>
           </tr>
@@ -98,12 +55,12 @@
           </div>
           <div class="form-group">
             <label for="status">Status</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" ng-model="status" />
           </div>
           <div class="form-group">
             <label for="start-date">Start Date</label>
             <div class='input-group'>
-              <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="time" ng-model="startDate">
+              <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="startDate" ng-model="startDate">
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -112,7 +69,7 @@
           <div class="form-group">
             <label for="end-date">End Date</label>
             <div class='input-group'>
-              <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="time" ng-model="endDate">
+              <input type="text" id="endDate" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="endDate" ng-model="endDate">
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -121,8 +78,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button ng-show="!showEditDelete" type="button" class="btn btn-primary" ng-click="add()">Add</button>
+          <button ng-show="showEditDelete" type="button" class="btn btn-primary" ng-click="edit()">Edit</button>
+          <button ng-show="showEditDelete" type="button" class="btn btn-primary" ng-click="delete()">Delete</button>
+          <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
         </div>
       </div>
 
