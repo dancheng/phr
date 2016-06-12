@@ -1,80 +1,30 @@
 <div id="dashboard" class="container-fluid">
-  <div class="page-header">
-    <h2><span class="fa fa-user"></span> {{data.member.demographic.firstName}} {{data.member.demographic.middleName}} {{data.member.demographic.lastName}}</h2>
-    <ul class="list-unstyled">
-      <li>Gender: {{data.member.demographic.gender}}</li>
-      <li>DOB: {{data.member.demographic.dob}}</li>
-    </ul>
-  </div>
+  <member-widget data="data.member"></member-widget>
 
   <alerts-widget data="data.alerts"></alerts-widget>
 
-  <div>
-    <h3><span class="fa fa-heartbeat"></span> Measurements</h3>
-  </div>
-
   <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
       <weight-widget data="data.member"></weight-widget>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
       <bp-widget data="data.member"></bp-widget>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
       <hr-widget data="data.member"></hr-widget>
     </div>
-  </div>
 
-  <div>
-    <h3><span class="fa fa-clipboard"></span> Current Health</h3>
   </div>
 
   <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <medications-widget></medications-widget>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <procedures-widget></procedures-widget>
-    </div>
-
 <!--
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <immunizations-widget></immunizations-widget>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <allergies-widget></allergies-widget>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <conditions-widget data="data.member"></conditions-widget>
     </div>
 -->
-
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <conditions-widget></conditions-widget>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <labs-widget></labs-widget>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <bmi-widget data="data.member"></bmi-widget>
     </div>
   </div>
-
-<!--
-  <div>
-    <h3><span class="fa fa-history"></span> Historic Health</h3>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <past-conditions-widget></past-conditions-widget>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <family-history-widget></family-history-widget>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <social-history-widget></social-history-widget>
-    </div>
-  </div>
--->
-
 </div>
 

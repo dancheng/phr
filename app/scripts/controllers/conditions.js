@@ -40,7 +40,6 @@ angular.module('phrApp')
       $scope.startDate = item.cond.startDate;
       $scope.endDate = item.cond.endDate;
       //angular.element('#endDate').val(endDate);
-console.log('item.cond', $scope.endDate);
 
       $scope.selectedCondition = { originalObject: item.cond };
       $scope.showEditDelete = true;

@@ -1,45 +1,48 @@
 'use strict';
 
 angular.module('phrApp')
-  .controller('BpCtrl', function ($scope, $http, config, initialData) {
+  .controller('BpCtrl', function ($scope, $http, config, MemberSvc, initialData) {
 
     $scope.data = _.chain(initialData.measurements).filter({type: 'bp'}).orderBy(['date'], ['desc']).value();
-console.log('$scope.data', $scope.data);
 
-    $scope.save = function() {
+    var formatData = function() {
+      _.forEach($scope.data, function(x) {
+        x.date = (x.date) ? moment(x.date).format('YYYY-MM-DD') : '';
+      });
+    };
 
+    //formatData();
+
+    $scope.add = function() {
       var config = {
         headers : {
           'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
         }
       };
 
-      var systolic = angular.element('.systolic').val();
-      var diastolic = angular.element('.diastolic').val();
-      var value = systolic + '/' + diastolic;
-      var uom = angular.element('select').val();
-      var memberId = initialData.demographic.id;
+      var value = $scope.systolic + '/' + $scope.diastolic;
+      var date = ($scope.date) ? new Date($scope.date).toISOString() : "";
+
       var entry = {
         rowID: 0,
         type: "bp",
         value: value + "",
-        uom: uom,
-        date: (new Date).toISOString()
+        uom: $scope.uom,
+        date: date
       };
 
-      initialData.measurements.push(entry);
-      $scope.data.push(entry);
-
       var data = $.param({
-        id: memberId,
+        id: initialData.demographic.id,
         json: JSON.stringify(entry)
       });
 
       $http.post("http://alphaphr.com:8080/core/mea", data, config).success(function(data, status) {
-        $scope.bp = { value: value, uom: uom };
+        MemberSvc.getData(initialData.demographic.id).success(function(data, status) {
+          $scope.data = _.chain(data.measurements).filter({type: 'bp'}).orderBy(['date'], ['desc']).value();
+          //formatData();
+        });
 
-        console.log('data', data);
+        angular.element('#bpModal').modal('hide');
       });
     }
-
   });

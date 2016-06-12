@@ -15,7 +15,9 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/angucomplete-alt.css" />
+    <link rel="stylesheet" href="styles/c3.css">
     <link rel="stylesheet" href="styles/app.css">
+    <link rel="stylesheet" href="styles/fonts.css">
     <!-- endbuild -->
   </head>
   <body ng-app="phrApp">
@@ -79,7 +81,14 @@
         </div><!-- /.container-fluid -->
       </nav>
      
-      <div ng-view></div>
+      <div class="container-fluid" ng-controller="AppCtrl">
+        <div ng-show="loading" class="loading">
+          <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </div>
+
+        <div ng-show="!loading" ng-view></div>
+      </div>
 
     </div>
 
@@ -118,9 +127,12 @@
     <script src="scripts/angucomplete-alt.js"></script>
     <script src="scripts/ui-bootstrap-tpls.js"></script>
     <script src="scripts/lodash.js"></script>
+    <script src="scripts/c3.js"></script>
+    <script src="scripts/d3.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/config.js"></script>
 
+    <script src="scripts/controllers/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/print.js"></script>
     <script src="scripts/controllers/help.js"></script>
@@ -132,6 +144,7 @@
     <script src="scripts/controllers/conditions.js"></script>
     <script src="scripts/controllers/labs.js"></script>
 
+    <script src="scripts/directives/memberWidget.js"></script>
     <script src="scripts/directives/alertsWidget.js"></script>
     <script src="scripts/directives/weightWidget.js"></script>
     <script src="scripts/directives/heightWidget.js"></script>
@@ -146,10 +159,13 @@
     <script src="scripts/directives/pastConditionsWidget.js"></script>
     <script src="scripts/directives/familyHistoryWidget.js"></script>
     <script src="scripts/directives/socialHistoryWidget.js"></script>
+    <script src="scripts/directives/bmiWidget.js"></script>
 
     <script src="scripts/services/memberSvc.js"></script>
     <script src="scripts/services/alertSvc.js"></script>
     <script src="scripts/services/snomedSvc.js"></script>
+    <script src="scripts/services/rxNormSvc.js"></script>
+    <script src="scripts/services/loincSvc.js"></script>
     <!-- endbuild -->
 </body>
 </html>

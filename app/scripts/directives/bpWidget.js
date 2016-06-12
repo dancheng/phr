@@ -14,42 +14,50 @@ angular.module('phrApp')
 
     function link(scope, element, attrs) {
       var measurements = scope.data.measurements;
+      var bps = _.chain(measurements).filter({'type': 'bp'}).orderBy(['date'], ['desc']).value();
 
       // get latest bp by date
-      scope.bp = _.chain(measurements).filter({'type': 'bp'}).orderBy(['date'], ['desc']).first(1).value();
+      scope.bp = bps[0];
 
-      scope.save = function() {
-        var config = {
-          headers : {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+      _.map(bps, function(x) {
+        x.date = moment(x.date).format('YYYY-MM-DD');
+        x.systolic = 0;
+        x.diastolic = 0;
+        if (x.value) {
+          var v = x.value.split('/');
+          x.systolic = v[0];
+          x.diastolic = v[1];
+        }
+      });
+
+      var chart = c3.generate({
+        bindto: '#bpChart',
+        data: {
+          x: 'x',
+          columns: [
+            _.concat(['x'], _.map(bps, 'date')),
+            _.concat(['Systolic'], _.map(bps, 'systolic')),
+            _.concat(['Diastolic'], _.map(bps, 'diastolic'))
+          ]
+        },
+        axis : {
+          x: {
+            type: 'timeseries',
+            tick: {
+              //format: function (x) { return x.getFullYear(); }
+              format: '%Y-%m' // format string is also available for timeseries data
+            }
+          },
+          y: {
+            label: {
+              text: 'mm Hg',
+              position: 'outer-middle'
+            }
           }
-        };
-
-        var systolic = element.find('#bp-systolic').val();
-        var diastolic = element.find('#bp-diastolic').val();
-        var bp = systolic + "/" + diastolic;
-        var uom = "mm Hg";
-        var date = element.find('#bp-date').val();
-        var dateTime = new Date(date);
-
-        var memberId = scope.data.demographic.id;
-        var data = $.param({
-          id: memberId,
-          json: JSON.stringify({
-            rowID: 0,
-            type: "bp",
-            value: bp,
-            uom: uom,
-            date: dateTime.toISOString()
-          })
-        });
-
-        $http.post("http://alphaphr.com:8080/core/mea", data, config).success(function(data, status) {
-          scope.bp = { value: bp, uom: uom };
-
-          element.find('#bpModal').modal('hide');
-          console.log('data', data);
-        });
-      }
+        },
+        zoom: {
+          enabled: false
+        }
+      });
     }
   });

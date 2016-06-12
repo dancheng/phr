@@ -4,33 +4,47 @@ angular.module('phrApp')
   .directive('conditionsWidget', function($http, config) {
     return {
       restrict: 'E',
-      scope: {},
+      scope: {
+        data: '='
+      },
       templateUrl: 'templates/conditionsWidget.html',
-      controller: controller,
       link: link
     };
 
-    function controller($scope) {
-      var url = config.baseUrl + '/getsnomeds?id=diabetes&category=disorder';
+    function link(scope, element, attrs) {
+      var conditions = scope.data.diagnoses;
 
-      $http({url: url, method: 'GET', cache: true}).then(function(response) {
-        $scope.data = response.data.concepts;
+      _.map(conditions, function(x) { 
+        x.startDate = (x.startDate) ? moment(x.startDate).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD');
+        x.endDate = (x.endDate) ? moment(x.endDate).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD');
       });
 
-      $scope.selectedDisorder = null;
-    }
+console.log('conditions', conditions)
+            //_.concat(['x'], _.map(conditions, 'startDate')),
 
-    function link(scope, element, attrs) {
-      scope.time = new Date();
-      scope.localSearch = function(str, concepts) {
-        var matches = [];
-        concepts.forEach(function(concept) {
-          if (concept.desc.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) {
-            matches.push(concept);
-          }
-        });
-
-        return matches;
-      };
+      var chart = c3.generate({
+        bindto: '#conditionsChart',
+        data: {
+//type: 'bar',
+        x: 'x',
+        columns: [
+            ['x', '2010-01-01', '2010-02-01'],
+            ['data1', 30, 30],
+            ['data2', 40, 40]
+        ]
+    },
+        axis: {
+          x: {
+            type: 'timeseries',
+            tick: {
+              format: '%Y-%m' // format string is also available for timeseries data
+            }
+          },
+          //rotated: true
+        },
+        transition: {
+          duration: 1000
+        }
+      });
     }
   });

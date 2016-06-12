@@ -1,40 +1,73 @@
 
 <div id="bp" class="container-fluid">
-<div>
-  <h3><span class="fa fa-heart"></span> Blood Pressure</h3>
-</div>
-
-<div class="row">
-  <form class="form-inline">
-    <div class="form-group">
-      <label>Blood pressure</label>
-      <input type="text" class="form-control systolic" size="4" />
-      /
-      <input type="text" class="form-control diastolic" size="4" />
-      <select class="form-control">
-        <option>mm Hg</option>
-      </select>
-    </div>
-    <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-  </form>
-</div>
-
-<div class="row" style="height:300px; overflow-y:auto;">
-  <div class="table-responsive">
-    <table class="table table-striped table-hover header-fixed">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Blood Pressure</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="bp in data">
-          <td>{{bp.date}}</td>
-          <td>{{bp.value}} {{bp.uom}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <h3><span class="fa fa-heart"></span> Blood Pressure</h3>
   </div>
+
+  <div class="row">
+    <a href="" class="btn" data-toggle="modal" data-target="#bpModal"><span class="fa fa-plus"></span> Add Blood Pressure</a>
+  </div>
+
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover header-fixed">
+        <thead>
+          <tr>
+            <th>Blood Pressure</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="bp in data">
+            <td>{{bp.value}}</td>
+            <td>{{bp.date}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
-</div>
+
+
+  <div class="modal fade" id="bpModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Blood Pressure</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-group">
+            <div class="form-group">
+              <label>Blood pressure</label>
+              <div class="form-inline">
+              <input type="text" class="form-control systolic" size="4" ng-model="systolic" />
+              /
+              <input type="text" class="form-control diastolic" size="4" ng-model="diastolic" />
+              <select class="form-control" ng-model="uom">
+                <option>mm Hg</option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <div class='input-group'>
+                <input type="text" class="form-control input-sm" datetimepicker datetimepicker-options="{icons:{next:'glyphicon glyphicon-arrow-right',previous:'glyphicon glyphicon-arrow-left',up:'glyphicon glyphicon-arrow-up',down:'glyphicon glyphicon-arrow-down'}}" placeholder="..." name="time" ng-model="date">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

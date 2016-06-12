@@ -14,39 +14,43 @@ angular.module('phrApp')
 
     function link(scope, element, attrs) {
      var measurements = scope.data.measurements;
-      // get latest bp by date
-      scope.hr = _.chain(measurements).filter({'type': 'hr'}).orderBy(['date'], ['desc']).first(1).value();
+      var hrs = _.chain(measurements).filter({'type': 'hr'}).orderBy(['date'], ['desc']).value();
 
-      scope.save = function() {
-        var config = {
-          headers : {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+      // get latest heart rate by date
+      scope.hr = hrs[0];
+
+      _.map(hrs, function(x) {
+        x.date = moment(x.date).format('YYYY-MM-DD');
+        x.value = +x.value;
+      });
+
+     var chart = c3.generate({
+        bindto: '#hrChart',
+        data: {
+          x: 'x',
+          columns: [ 
+            _.concat(['x'], _.map(hrs, 'date')),
+            _.concat(['Heart Rate'], _.map(hrs, 'value'))
+          ]
+        },
+        axis : {
+          x: {
+            type: 'timeseries',
+            tick: {
+              //format: function (x) { return x.getFullYear(); }
+              format: '%Y-%m' // format string is also available for timeseries data
+            }
+          },
+          y: {
+            label: {
+              text: 'bpm',
+              position: 'outer-middle'
+            }
           }
-        };
-
-        var hr = element.find('#hr-rate').val();
-        var uom = "bpm";
-        var date = element.find('#hr-date').val();
-        var dateTime = new Date(date);
-
-        var memberId = scope.data.demographic.id;
-        var data = $.param({
-          id: memberId,
-          json: JSON.stringify({
-            rowID: 0,
-            type: "heartRate",
-            value: hr,
-            uom: uom,
-            date: dateTime.toISOString()
-          })
-        });
-
-        $http.post("http://alphaphr.com:8080/core/mea", data, config).success(function(data, status) {
-          scope.hr = { value: hr, uom: uom };
-
-          element.find('#hrModal').modal('hide');
-          console.log('data', data);
-        });
-      }
+        },
+        zoom: {
+          enabled: false
+        }
+      });
     }
   });
