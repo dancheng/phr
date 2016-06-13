@@ -16,8 +16,7 @@ angular.module('phrApp')
       var measurements = scope.data.measurements;
       var bps = _.chain(measurements).filter({'type': 'bp'}).orderBy(['date'], ['desc']).value();
 
-      // get latest bp by date
-      scope.bp = bps[0];
+      scope.showChart = false;
 
       _.map(bps, function(x) {
         x.date = moment(x.date).format('YYYY-MM-DD');
@@ -30,8 +29,10 @@ angular.module('phrApp')
         }
       });
 
+      scope.current = bps[0];
+
       var chart = c3.generate({
-        bindto: '#bpChart',
+        bindto: element.find('.chart').get(0),
         data: {
           x: 'x',
           columns: [

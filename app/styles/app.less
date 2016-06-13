@@ -1,4 +1,5 @@
 @import 'areas/dashboard.less';
+@import 'areas/alertsWidget.less';
 @import 'areas/weight.less';
 @import 'areas/bp.less';
 @import 'areas/hr.less';
@@ -11,4 +12,38 @@
 
 body {
   background-color: GHOSTWHITE;
+}
+
+.clearfix {
+  clear: both;
+}
+
+#main {
+  padding: 0;
+
+  .jumbotron {
+    margin-top: 0;
+    margin-bottom: 20px;
+    background-color: #29a329;
+    background-image: url(../images/jumbotron.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.2em 0.2em 0.2em;
+    border-radius: 0;
+  }
+
+  .loading {
+    line-height: 300px;
+    height: 300px;
+    text-align: center;
+    i {
+      font-size: 5em;
+    }
+  }
+}
+
+.navbar {
+  margin-bottom: 0;
 }

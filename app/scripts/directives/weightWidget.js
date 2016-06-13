@@ -15,19 +15,21 @@ angular.module('phrApp')
       var measurements = scope.data.measurements;
       var weights = _.chain(measurements).filter({'type': 'weight'}).orderBy(['date'], ['desc']).value();
 
-      // get latest weight by date
-      scope.weight = weights[0];
+      scope.showChart = false;
 
       _.map(weights, function(x) {
         x.date = moment(x.date).format('YYYY-MM-DD');
         x.value = +x.value;
         if (x.uom === 'kg') {
-          x.value = parseInt(x.value * 2.20462);
+          x.value *= 2.20462;
         }
+        x.value = Math.round(x.value * 10) / 10;
       });
 
+      scope.current = weights[0];
+
       var chart = c3.generate({
-        bindto: '#weightChart',
+        bindto: element.find('.chart').get(0),
         data: {
           x: 'x',
           columns: [ 

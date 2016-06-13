@@ -13,5 +13,6 @@ angular.module('phrApp')
 
 
     function link(scope, element, attrs) {
+      scope.count = scope.data.length;
     }
   });

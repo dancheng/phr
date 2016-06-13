@@ -36,9 +36,7 @@ angular.module('phrApp')
       });
 
       $http.post("http://alphaphr.com:8080/core/mea", data, config).success(function(data, status) {
-        console.log('1data', data);
         MemberSvc.getData(initialData.demographic.id).success(function(data, status) {
-          console.log('2data', data);
           $scope.data = _.chain(data.measurements).filter({type: 'weight'}).orderBy(['date'], ['desc']).value();
           formatData();
         });

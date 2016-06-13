@@ -16,8 +16,7 @@ angular.module('phrApp')
       var weights = _.chain(measurements).filter({'type': 'weight'}).orderBy(['date'], ['desc']).value();
       var heights = _.chain(measurements).filter({'type': 'height'}).orderBy(['date'], ['desc']).value();
 
-      // get latest weight by date
-      scope.weight = weights[0];
+      scope.showChart = false;
 
       // use latest height
       var height = heights[0];
@@ -29,17 +28,19 @@ angular.module('phrApp')
 
       _.map(weights, function(x) {
         x.date = moment(x.date).format('YYYY-MM-DD');
-        x.value = +x.value;
+        x.weight = +x.value;
         if (x.uom === 'lbs') {
-          x.value = x.value * .453592;
+          x.weight *= .453592;
         }
 
         // weight / height^2
-        x.bmi = Math.round(x.value / Math.pow(height.value, 2) * 10) / 10 ;
+        x.bmi = Math.round(x.weight / Math.pow(height.value, 2) * 10) / 10 ;
       });
 
+      scope.current = weights[0];
+
       var chart = c3.generate({
-        bindto: '#bmiChart',
+        bindto: element.find('.chart').get(0),
         data: {
           x: 'x',
           columns: [ 

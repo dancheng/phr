@@ -13,19 +13,20 @@ angular.module('phrApp')
 
 
     function link(scope, element, attrs) {
-     var measurements = scope.data.measurements;
+      var measurements = scope.data.measurements;
       var hrs = _.chain(measurements).filter({'type': 'hr'}).orderBy(['date'], ['desc']).value();
 
-      // get latest heart rate by date
-      scope.hr = hrs[0];
+      scope.showChart = false;
 
       _.map(hrs, function(x) {
         x.date = moment(x.date).format('YYYY-MM-DD');
         x.value = +x.value;
       });
 
+     scope.current = hrs[0];
+
      var chart = c3.generate({
-        bindto: '#hrChart',
+        bindto: element.find('.chart').get(0),
         data: {
           x: 'x',
           columns: [ 

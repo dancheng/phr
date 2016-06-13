@@ -1,7 +1,19 @@
 <div class="widget">
   <div class="contents">
-    <h3>Weight</h3>
-    <div id="weightChart"></div>
+    <h3>
+      <a href class="toggle" ng-click="showChart = !showChart"><span class="fa fa-line-chart"></span></a>
+      Weight
+    </h3>
+    <div class="current" ng-show="!showChart">
+      <div class="content">
+        <h1>{{current.value}} <span>{{current.uom}}</span></h1>
+        <div>{{current.date}}</div>
+      </div>
+      <div class="icon">
+        <span class="weight fa fa-balance-scale"></span>
+      </div>
+    </div>
+    <div class="chart" ng-show="showChart"></div>
   </div>
 </div>
 

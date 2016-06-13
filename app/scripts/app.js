@@ -33,7 +33,6 @@ var app = angular
               member: MemberSvc.getData(10000),
               alerts: AlertSvc.getData(10000)
             }).then(function(data) {
-console.log('main data', data);
               return { member: data.member.data, alerts: data.alerts.data };
             });
 
@@ -152,7 +151,6 @@ console.log('main data', data);
   });
 
 app.run(['$rootScope', function($rootScope) {
-console.log('app.run');
   $rootScope.$on('$stateChangeStart', function(eventm, toParams, fromState, fromParams) {
 console.log('$stateChangeStart');
   });
