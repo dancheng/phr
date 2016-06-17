@@ -2,34 +2,12 @@
 
 angular.module('phrApp')
   .controller('MedicationsCtrl', function ($scope, $http, config, MemberSvc, initialData) {
-    $scope.localData = initialData.rxnorm;
-
     $scope.selectedMedication = null;
-
-/*
-    $scope.remoteUrlRequestFn = function(str) {
-      return { id: str };
-    }
-
-    $scope.localSearch = function(str, concepts) {
-      var matches = [];
-
-      concepts.forEach(function(concept) {
-        if (concept.desc.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) {
-          matches.push(concept);
-        }
-      });
-
-      return matches;
-    };
-*/
 
     $scope.data = _.orderBy(initialData.member.medications, ['endDate'], ['desc']);
 
     var formatData = function() {
       _.forEach($scope.data, function(x) {
-        var med = _.find($scope.localData, {code: x.code});
-        x.desc = med.desc;
         x.startDate = (x.startDate) ? moment(x.startDate).format('YYYY-MM-DD') : '';
         x.endDate = (x.endDate) ? moment(x.endDate).format('YYYY-MM-DD') : '';
       });

@@ -13,18 +13,18 @@
       <table class="table table-striped table-hover header-fixed">
         <thead>
           <tr>
-            <th>Medication</th>
-            <th>Usage</th>
-            <th>Start Date</th>
-            <th>End Date</th>
+            <th style="width: 55% !important"><br/>Medication</th>
+            <th style="width: 15% !important"><br/>Usage</th>
+            <th style="width: 15% !important">Start<br/>Date</th>
+            <th style="width: 15% !important">End<br/>Date</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="med in data">
-            <td>{{med.desc}} ({{med.code}})</td>
-            <td>{{med.usage}}</td>
-            <td>{{med.startDate}}</td>
-            <td>{{med.endDate}}</td>
+            <td style="width: 55% !important">{{med.desc}} ({{med.code}})</td>
+            <td style="width: 15% !important">{{med.usage}}</td>
+            <td style="width: 15% !important">{{med.startDate}}</td>
+            <td style="width: 15% !important">{{med.endDate}}</td>
           </tr>
         </tbody>
       </table>

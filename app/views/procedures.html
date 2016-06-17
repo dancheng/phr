@@ -13,14 +13,14 @@
       <table class="table table-striped table-hover header-fixed">
         <thead>
           <tr>
-            <th>Procedure</th>
-            <th>Service Date</th>
+            <th style="width: 75% !important"><br/>Procedure</th>
+            <th style="width: 25% !important">Service<br/>Date</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="proc in data">
-            <td>{{proc.desc}} ({{proc.code}})</td>
-            <td>{{proc.serviceDate}}</td>
+            <td style="width: 75% !important">{{proc.desc}} ({{proc.code}})</td>
+            <td style="width: 25% !important">{{proc.serviceDate}}</td>
           </tr>
         </tbody>
       </table>

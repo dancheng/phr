@@ -87,10 +87,9 @@ var app = angular
         resolve: {
           "initialData": ['$q', 'MemberSvc', 'RxNormSvc', function($q, MemberSvc, RxNormSvc) {
             return $q.all({
-              member: MemberSvc.getData(10000),
-              rxnorm: RxNormSvc.getData()
+              member: MemberSvc.getData(10000)
             }).then(function(data) {
-              return { member: data.member.data, rxnorm: data.rxnorm.data.concepts };
+              return { member: data.member.data };
             });
 
           }]

@@ -13,18 +13,18 @@
       <table class="table table-striped table-hover header-fixed">
         <thead>
           <tr>
-            <th>Lab</th>
-            <th>Value</th>
-            <th>Service Date</th>
-            <th>Report Date</th>
+            <th style="width: 55% !important"><br/>Lab</th>
+            <th style="width: 15% !important"><br/>Value</th>
+            <th style="width: 15% !important">Service<br/>Date</th>
+            <th style="width: 15% !important">Report<br/>Date</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="lab in data">
-            <td>{{lab.desc}} ({{lab.code}})</td>
-            <td>{{lab.value}} {{lab.uom}}</td>
-            <td>{{lab.serviceDate}}</td>
-            <td>{{lab.reportDate}}</td>
+            <td style="width: 55% !important">{{lab.desc}} ({{lab.code}})</td>
+            <td style="width: 15% !important">{{lab.value}} {{lab.uom}}</td>
+            <td style="width: 15% !important">{{lab.serviceDate}}</td>
+            <td style="width: 15% !important">{{lab.reportDate}}</td>
           </tr>
         </tbody>
       </table>
